@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import './App.css';
 import { Route, Routes } from "react-router-dom";
 import Header from "../Header/Header";
+import Main from "../Main/Main";
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-        // element={Main}
+          element={<Main />}
         />
       </Routes>
 
