@@ -1,0 +1,35 @@
+.profile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 40px;
+  background: #2BE080;
+  width: 100px;
+  height: 32px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.profile-link__text {
+  color: #000;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  padding-left: 11px;
+}
+
+.profile-link__icon {
+  border-radius: 50px;
+  background: #F9F9F9;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  background-image: url(../../images/icon-header.svg);
+  background-position: center;
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  margin-right: 3px;
+}
