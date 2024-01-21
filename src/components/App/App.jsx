@@ -7,7 +7,7 @@ import Main from "../Main/Main";
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
 
   return (
     <div className="page">

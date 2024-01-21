@@ -31,9 +31,4 @@ export default function Header({ loggedIn }) {
 
 Header.propTypes = {
   loggedIn: PropTypes.bool
-  // location: PropTypes.shape({
-  //   pathname: PropTypes.string,
-  // }),
-  // email: PropTypes.string,
-  // onSignOut: PropTypes.func,
 };
