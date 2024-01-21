@@ -3,7 +3,7 @@
 import SectionTitle from "../SectionTitle/SectionTitle"
 import "./Techs.css";
 
-export default function Promo() {
+export default function Techs() {
   return (
     <section className="techs">
       <SectionTitle text="Технологии" />
