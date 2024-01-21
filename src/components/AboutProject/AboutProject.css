@@ -1,0 +1,83 @@
+.about-project {
+  background: #FFF;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px 70px 110px;
+  box-sizing: border-box;
+}
+
+.about-project__columns {
+  display: flex;
+  flex-direction: row;
+  gap: 40px
+}
+
+.about-project__column {
+  flex: 1;
+}
+
+.about-project__brief {
+  margin: 0;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+  padding-top: 70px;
+}
+
+.about-project__paragraph {
+  margin: 0;
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  padding-top: 26px;
+}
+
+.about-project__timeline {
+  display: flex;
+  flex-direction: row;
+  margin-top: 110px;
+}
+
+.about-project__item {
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+}
+
+.about-project__item.about-project__item_type_green {
+  flex: 1;
+}
+
+.about-project__label {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 9px 0;
+  margin: 0;
+}
+
+.about-project__label_type_green {
+  background-color: #2BE080;
+}
+
+.about-project__category {
+  color: #A0A0A0;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  margin: 14px 0 0;
+}
