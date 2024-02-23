@@ -10,5 +10,5 @@ export default function SectionTitle({ text }) {
 }
 
 SectionTitle.propTypes = {
-  test: PropTypes.string
+  text: PropTypes.string
 };

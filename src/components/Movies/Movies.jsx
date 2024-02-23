@@ -1,13 +1,24 @@
-// import PropTypes from 'prop-types';
-// import { Link } from "react-router-dom";
-import SearchForm from "../SearchForm/SearchForm"
 import "./Movies.css";
+import PropTypes from 'prop-types';
+import SearchForm from "../SearchForm/SearchForm"
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-export default function Movies() {
+export default function Movies({ cards }) {
 
   return (
-    <section className="movies">
+    <main className="movies">
       <SearchForm />
-    </section>
+      <MoviesCardList
+        cards={cards}
+      />
+    </main>
   )
 }
+
+Movies.propTypes = {
+  cards: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+    })
+  ),
+};
