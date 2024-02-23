@@ -1,7 +1,7 @@
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import './SearchForm.css';
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import "./SearchForm.css";
 
-const SearchForm = () => {
+export default function SearchForm() {
   return (
     <form className="search-form">
       <div className="search-form__field">
@@ -11,6 +11,4 @@ const SearchForm = () => {
       <FilterCheckbox />
     </form>
   );
-};
-
-export default SearchForm;
+}
