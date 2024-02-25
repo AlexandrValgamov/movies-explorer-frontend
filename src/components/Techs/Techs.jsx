@@ -1,5 +1,3 @@
-// import React, { useState } from "react";
-// import PropTypes from 'prop-types';
 import SectionTitle from "../SectionTitle/SectionTitle"
 import "./Techs.css";
 
