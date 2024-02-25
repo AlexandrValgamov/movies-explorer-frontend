@@ -16,3 +16,22 @@
   padding-bottom: 23px;
   border-bottom: 1px solid #000;
 }
+
+@media screen and (max-width: 769px) {
+  .title {
+    padding-top: 90px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .title {
+    padding-top: 70px;
+  }
+
+  .title__text {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+    padding-bottom: 28px;
+  }
+}
