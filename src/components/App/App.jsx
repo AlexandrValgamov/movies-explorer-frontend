@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     setCards(cardsData); // временнно установленные карточки
-    setLoggedIn(true)
+    setLoggedIn(false)
   }, []);
 
   return (
