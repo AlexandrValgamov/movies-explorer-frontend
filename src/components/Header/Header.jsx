@@ -1,42 +1,34 @@
-// import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import "./Header.css";
 
-export default function Header({ loggedIn }) {
+export default function Header({ loggedIn, location }) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  // React.useEffect(() => {
-  //   if (location.pathname === "/") {
-      
-  //   } else {
-      
-  //   }
-  // }, [location]);
+  function handleClick() {
+    setIsOpen(prev => !prev);
+  }
 
   return (
-    <header className="header">
+    <header className={`header${location.pathname === '/' ? ' header_theme_dark' : ''}`}>
       <div className="header__logo" />
-      <div className="header__container">
-        {loggedIn ? (
-          <Navigation />
-        ) : (
-          <nav className="header__nav">
-            <ul className="header__list">
-              <li className="header__item">
-                <Link to="/register" className="header__link">Регистрация</Link>
-              </li>
-              <li className="header__item">
-                <Link to="/login" className="header__link header__link_type_login">Войти</Link>
-              </li>
-            </ul>
-          </nav>
-        )}
-      </div>
+      <Navigation
+        loggedIn={loggedIn}
+        isOpen={isOpen}
+        location={location}
+      />
+      <button
+        className={`header__burger-button${location.pathname === '/' ? ' header__burger-button_theme_dark' : ''}`}
+        onClick={handleClick}
+      />
     </header>
   )
 }
 
 Header.propTypes = {
-  loggedIn: PropTypes.bool
+  loggedIn: PropTypes.bool,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
 };

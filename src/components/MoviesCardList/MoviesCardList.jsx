@@ -6,7 +6,7 @@ export default function MoviesCardList({ cards }) {
   return (
     <section className="cards">
       <div className="cards__gallary" aria-label="Галерея">
-        {cards.slice(0, 20).map(
+        {cards.slice(0, 16).map(
           card => <MoviesCard
             key={card.id}
             card={card}

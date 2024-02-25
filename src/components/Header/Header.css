@@ -7,11 +7,13 @@
   margin: 0 auto;
   padding: 18px 70px;
   box-sizing: border-box;
-  background: #073042;
+  background-color: #FFFFFF;
+  color: #000000;
 }
 
-.header__container {
-  width: 100%;
+.header_theme_dark {
+  background: #073042;
+  color: #FFF;
 }
 
 .header__logo {
@@ -22,36 +24,34 @@
   background-repeat: no-repeat;
 }
 
-.header__list {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 30px
+.header__burger-button {
+  display: none;
+  background-image: url(../../images/burger-menu-black.svg);
+  z-index: 2;
 }
 
-.header__item {
-  display: flex;
-  align-items: center;
+.header__burger-button_theme_dark {
+  background-image: url(../../images/burger-menu-white.svg);
 }
 
-.header__link {
-  color: #FFF;
-  text-align: right;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  text-decoration: none;
+@media screen and (max-width: 769px) {
+  .header {
+    padding: 15px 30px;
+  }
+  
+  .header__burger-button {
+    display: block;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    outline: 1px solid red;
+  }
 }
 
-.header__link_type_login {
-  padding: 8px 20px;
-  border-radius: 3px;
-  background: #2BE080;
-  color: #000;
-  box-sizing: border-box;
+@media screen and (max-width: 430px) {
+  .header {
+    padding: 15px 14px 16px;
+  }
 }

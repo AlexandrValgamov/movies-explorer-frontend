@@ -3,11 +3,20 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 40px;
-  background: #2BE080;
+  background-color: #FFFFFF;
   width: 100px;
   height: 32px;
   flex-shrink: 0;
   text-decoration: none;
+  box-shadow: 0px 3px 14px 0px #00000014;
+}
+
+.profile-link:hover {
+  opacity: .7;
+}
+
+.profile-link_theme_dark {
+  background-color: #2BE080;
 }
 
 .profile-link__text {
@@ -23,7 +32,7 @@
 
 .profile-link__icon {
   border-radius: 50px;
-  background: #F9F9F9;
+  background-color: #F9F9F9;
   width: 26px;
   height: 26px;
   flex-shrink: 0;
@@ -32,4 +41,16 @@
   background-size: 12px 12px;
   background-repeat: no-repeat;
   margin-right: 3px;
+}
+
+@media screen and (max-width: 769px) {
+  .profile-link {
+    margin-bottom: 90px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .profile-link {
+    margin-bottom: 46px;
+  }
 }
