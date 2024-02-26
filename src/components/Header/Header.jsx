@@ -19,7 +19,7 @@ export default function Header({ loggedIn, location }) {
         location={location}
       />
       {loggedIn && <button
-        className={`header__burger-button${location.pathname === '/' ? ' header__burger-button_theme_dark' : ''}`}
+        className={`header__burger-button${location.pathname === '/' ? ' header__burger-button_theme_dark' : ''}${isOpen ? ' header__burger-button_active' : ''}`}
         onClick={handleClick}
       />}
     </header>

@@ -72,14 +72,15 @@
     background-color: #FFFFFF;
     height: 100vh;
     max-width: 520px;
-    z-index: 1;
-    transition: transform .3s ease;
+    z-index: -1;
+    transition: transform .3s ease, z-index .3s .3s;
     transform: translateX(100%);
-    outline: 1px solid red;
   }
 
   .navigation_type_movies_active {
     transform: translateX(0);
+    z-index: 1;
+    transition: transform .3s ease, z-index .3s;
   }
 
   .navigation__list_type_movies {
@@ -97,5 +98,7 @@
   .navigation__link_type_movies {
     font-size: 18px;
     line-height: 22px;
+    color: #000000;
+
   }
 }
