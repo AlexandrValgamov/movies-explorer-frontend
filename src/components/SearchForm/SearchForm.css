@@ -44,3 +44,24 @@
 .search-form__button:hover {
   opacity: .8;
 }
+
+@media screen and (max-width: 900px) {
+  .search-form {
+    padding: 80px 30px 60px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .search-form {
+    padding: 84px 14px 50px;
+  }
+
+  .search-form__input {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .search-form__field {
+    padding-bottom: 9px;
+  }
+}
