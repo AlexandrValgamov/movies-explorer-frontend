@@ -33,6 +33,7 @@
 
 .portfolio__item:last-child {
   border-bottom: none;
+  padding-bottom: 0;
 }
 
 .portfolio__link {
@@ -47,4 +48,37 @@
 
 .portfolio__link_type_arrow {
   line-height: 60px;
+}
+
+@media screen and (max-width: 900px) {
+  .portfolio {
+    padding: 0 50px 90px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .portfolio {
+    padding: 0 14px 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+  }
+
+  .portfolio__list {
+    margin-top: 40px;
+  }
+
+  .portfolio__item {
+    padding-bottom: 19px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
 }
