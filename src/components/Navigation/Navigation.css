@@ -43,6 +43,10 @@
   text-decoration: none;
 }
 
+.navigation__link_active {
+  font-weight: 500;
+}
+
 .navigation__link_type_movies {
   font-size: 13px;
   line-height: 18px;
@@ -96,9 +100,14 @@
   }
 
   .navigation__link_type_movies {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 27px;
     color: #000000;
+  }
 
+  .navigation__link_active {
+    font-weight: 400;
+    border-bottom: 2px solid #000000;
   }
 }

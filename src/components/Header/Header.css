@@ -16,6 +16,14 @@
   color: #FFF;
 }
 
+.header__link {
+  text-decoration: none;
+}
+
+.header__link:hover {
+  opacity: .7;
+}
+
 .header__logo {
   background-image: url(../../images/logo.svg);
   min-width: 38px;
@@ -28,6 +36,11 @@
   display: none;
   background-image: url(../../images/burger-menu-black.svg);
   z-index: 2;
+  cursor: pointer;
+}
+
+.header__burger-button:hover {
+  opacity: .8;
 }
 
 .header__burger-button_theme_dark {

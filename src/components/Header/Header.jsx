@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import Navigation from "../Navigation/Navigation";
 import "./Header.css";
@@ -12,7 +13,9 @@ export default function Header({ loggedIn, location }) {
 
   return (
     <header className={`header${location.pathname === '/' ? ' header_theme_dark' : ''}`}>
-      <div className="header__logo" />
+      <Link to="/" className="header__link">
+        <div className="header__logo" />
+      </Link>
       <Navigation
         loggedIn={loggedIn}
         isOpen={isOpen}
