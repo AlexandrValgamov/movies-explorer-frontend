@@ -53,6 +53,11 @@
   text-decoration: none;
   display: inline-block;
   margin-top: 99px;
+  cursor: pointer;
+}
+
+.about-me__link:hover {
+  opacity: .7;
 }
 
 .about-me__image {

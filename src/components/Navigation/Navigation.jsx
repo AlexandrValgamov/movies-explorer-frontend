@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import ProfileLink from "../ProfileLink/ProfileLink";
@@ -9,16 +8,39 @@ export default function Navigation({ loggedIn, isOpen, location }) {
   return (
     <>
       {loggedIn && (
-        <nav className={`navigation navigation_type_movies${isOpen ? ' navigation_type_movies_active' : ''}`}>
+        <nav className={
+          `navigation
+          navigation_type_movies
+          ${isOpen ? ' navigation_type_movies_active' : ''}
+          `
+        }>
           <ul className="navigation__list navigation__list_type_movies navigation__list_type_movies">
             <li className="navigation__item navigation__item_type_movies">
-              <Link to="/movies" className="navigation__link navigation__link_type_movies">Главная</Link>
+              <Link
+                to="/"
+                className={`navigation__link ${location.pathname === "/"
+                  ? "navigation__link_active"
+                  : ""
+                  } navigation__link_type_movies`}
+              >Главная</Link>
             </li>
             <li className="navigation__item">
-              <Link to="/movies" className="navigation__link navigation__link_type_movies">Фильмы</Link>
+              <Link
+                to="/movies"
+                className={`navigation__link ${location.pathname === "/movies"
+                  ? "navigation__link_active"
+                  : ""
+                  } navigation__link_type_movies`}
+              >Фильмы</Link>
             </li>
             <li className="navigation__item">
-              <Link to="/saved-movies" className="navigation__link navigation__link_type_movies">Сохраненные фильмы</Link>
+              <Link
+                to="/saved-movies"
+                className={`navigation__link ${location.pathname === "/saved-movies"
+                  ? "navigation__link_active"
+                  : ""
+                  } navigation__link_type_movies`}
+              >Сохраненные фильмы</Link>
             </li>
           </ul>
           <ProfileLink location={location} />

@@ -12,7 +12,7 @@
 }
 
 .profile-link:hover {
-  opacity: .7;
+  opacity: .8;
 }
 
 .profile-link_theme_dark {
@@ -46,6 +46,10 @@
 @media screen and (max-width: 769px) {
   .profile-link {
     margin-bottom: 90px;
+  }
+
+  .profile-link_theme_dark {
+    background-color: #FFFFFF;
   }
 }
 
