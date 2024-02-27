@@ -21,10 +21,15 @@ export default function Header({ loggedIn, location }) {
         isOpen={isOpen}
         location={location}
       />
-      {loggedIn && <button
-        className={`header__burger-button${location.pathname === '/' ? ' header__burger-button_theme_dark' : ''}${isOpen ? ' header__burger-button_active' : ''}`}
-        onClick={handleClick}
-      />}
+      {loggedIn &&
+        <>
+          <div className={`header__overlay${isOpen ? ' header__overlay_active' : ''}`}></div>
+          <button
+            className={`header__burger-button${location.pathname === '/' ? ' header__burger-button_theme_dark' : ''}${isOpen ? ' header__burger-button_active' : ''}`}
+            onClick={handleClick}
+          />
+        </>
+      }
     </header>
   )
 }
