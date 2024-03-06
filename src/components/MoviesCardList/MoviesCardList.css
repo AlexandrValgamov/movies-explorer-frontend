@@ -10,7 +10,7 @@
   grid-template-columns: repeat(auto-fit, minmax(min-content, 270px));
   gap: 38px 20px;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .cards__button {
