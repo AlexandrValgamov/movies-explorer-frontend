@@ -7,13 +7,13 @@
   margin: 0 auto;
   padding: 18px 70px;
   box-sizing: border-box;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #000000;
 }
 
 .header_theme_dark {
   background: #073042;
-  color: #FFF;
+  color: #fff;
 }
 
 .header__link {
@@ -21,15 +21,7 @@
 }
 
 .header__link:hover {
-  opacity: .7;
-}
-
-.header__logo {
-  background-image: url(../../images/logo.svg);
-  min-width: 38px;
-  min-height: 38px;
-  background-size: cover;
-  background-repeat: no-repeat;
+  opacity: 0.7;
 }
 
 .header__burger-button {
@@ -40,7 +32,7 @@
 }
 
 .header__burger-button:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .header__burger-button_theme_dark {

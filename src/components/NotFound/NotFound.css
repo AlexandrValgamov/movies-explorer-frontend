@@ -3,7 +3,8 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  height: 100vh;
 }
 
 .not-found__title {
@@ -41,25 +42,28 @@
   line-height: 17px;
   letter-spacing: 0em;
   text-align: center;
-  color: #3456F3;
+  color: #3456f3;
 }
 
 .not-found__button:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
-
 
 @media screen and (max-width: 900px) {
   .not-found__title {
-    margin-top: 408px;
+    margin-top: 186px;
   }
 }
 
 @media screen and (max-width: 760px) {
+  .not-found {
+    justify-content: center;
+  }
   .not-found__title {
     margin-top: 329px;
     font-size: 80px;
     line-height: 97px;
+    margin: 0;
   }
 
   .not-found__subtitle {
@@ -69,7 +73,10 @@
   }
 
   .not-found__button {
-    margin-top: 284px;
+    position: fixed;
+    bottom: 30px;
+    left: calc(50% - 7.5px);
+    margin: 0;
     font-size: 12px;
     line-height: 15px;
   }
