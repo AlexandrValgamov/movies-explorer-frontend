@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import "./ProfileLink.css";
+import './ProfileLink.css';
 
 export default function ProfileLink({ location }) {
   return (
@@ -11,7 +11,7 @@ export default function ProfileLink({ location }) {
       <span className="profile-link__text">Аккаунт</span>
       <div className="profile-link__icon" />
     </Link>
-  )
+  );
 }
 
 ProfileLink.propTypes = {

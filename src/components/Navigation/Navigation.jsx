@@ -1,47 +1,44 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ProfileLink from "../ProfileLink/ProfileLink";
-import "./Navigation.css";
+import ProfileLink from '../ProfileLink/ProfileLink';
+import './Navigation.css';
 
 export default function Navigation({ loggedIn, isOpen, location }) {
+  const links = loggedIn
+    ? [
+        { to: '/', text: 'Главная', activePath: '/' },
+        { to: '/movies', text: 'Фильмы', activePath: '/movies' },
+        {
+          to: '/saved-movies',
+          text: 'Сохраненные фильмы',
+          activePath: '/saved-movies',
+        },
+      ]
+    : [
+        { to: '/signup', text: 'Регистрация' },
+        { to: '/signin', text: 'Войти' },
+      ];
 
   return (
     <>
       {loggedIn && (
-        <nav className={
-          `navigation
-          navigation_type_movies
-          ${isOpen ? ' navigation_type_movies_active' : ''}
-          `
-        }>
-          <ul className="navigation__list navigation__list_type_movies navigation__list_type_movies">
-            <li className="navigation__item navigation__item_type_movies">
-              <Link
-                to="/"
-                className={`navigation__link ${location.pathname === "/"
-                  ? "navigation__link_active"
-                  : ""
-                  } navigation__link_type_movies`}
-              >Главная</Link>
-            </li>
-            <li className="navigation__item">
-              <Link
-                to="/movies"
-                className={`navigation__link ${location.pathname === "/movies"
-                  ? "navigation__link_active"
-                  : ""
-                  } navigation__link_type_movies`}
-              >Фильмы</Link>
-            </li>
-            <li className="navigation__item">
-              <Link
-                to="/saved-movies"
-                className={`navigation__link ${location.pathname === "/saved-movies"
-                  ? "navigation__link_active"
-                  : ""
-                  } navigation__link_type_movies`}
-              >Сохраненные фильмы</Link>
-            </li>
+        <nav
+          className={`navigation navigation_type_movies ${isOpen ? ' navigation_type_movies_active' : ''}`}
+        >
+          <ul className="navigation__list navigation__list_type_movies">
+            {links.map((link, index) => (
+              <li
+                key={index}
+                className={`navigation__item ${index === 0 ? 'navigation__item_type_burger' : ''}`}
+              >
+                <Link
+                  to={link.to}
+                  className={`navigation__link ${location.pathname === link.activePath ? 'navigation__link_active' : ''} navigation__link_type_movies`}
+                >
+                  {link.text}
+                </Link>
+              </li>
+            ))}
           </ul>
           <ProfileLink location={location} />
         </nav>
@@ -50,16 +47,18 @@ export default function Navigation({ loggedIn, isOpen, location }) {
       {!loggedIn && (
         <nav className="navigation">
           <ul className="navigation__list">
-            <li className="navigation__item">
-              <Link to="/register" className="navigation__link">Регистрация</Link>
-            </li>
-            <li className="navigation__item">
-              <Link to="/login" className="navigation__link navigation__link_type_login">Войти</Link>            </li>
+            {links.map((link, index) => (
+              <li key={index} className={'navigation__item'}>
+                <Link to={link.to} className={'navigation__link'}>
+                  {link.text}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       )}
     </>
-  )
+  );
 }
 
 Navigation.propTypes = {

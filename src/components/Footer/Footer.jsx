@@ -1,9 +1,11 @@
-import "./Footer.css";
+import './Footer.css';
 
 export default function Footer() {
   return (
     <footer className="footer">
-      <p className="footer__project">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+      <p className="footer__project">
+        Учебный проект Яндекс.Практикум х BeatFilm.
+      </p>
       <div className="footer__info">
         <p className="footer__copyright">&copy; {new Date().getFullYear()}</p>
         <ul className="footer__list">
@@ -30,5 +32,5 @@ export default function Footer() {
         </ul>
       </div>
     </footer>
-  )
+  );
 }

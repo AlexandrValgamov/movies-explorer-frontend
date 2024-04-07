@@ -1,5 +1,5 @@
-import SectionTitle from "../SectionTitle/SectionTitle"
-import "./Techs.css";
+import SectionTitle from '../SectionTitle/SectionTitle';
+import './Techs.css';
 
 export default function Techs() {
   return (
@@ -7,8 +7,8 @@ export default function Techs() {
       <SectionTitle text="Технологии" />
       <h3 className="techs__title">7 технологий</h3>
       <p className="techs__subtitle">
-        На курсе веб-разработки мы освоили технологии,
-        которые применили в дипломном проекте.
+        На курсе веб-разработки мы освоили технологии, которые применили в
+        дипломном проекте.
       </p>
       <ul className="techs__list">
         <li className="techs__item">
@@ -34,5 +34,5 @@ export default function Techs() {
         </li>
       </ul>
     </section>
-  )
+  );
 }
