@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
-  margin: 0 auto;
+  width: 100%;
   padding: 75px 70px;
   max-width: 1280px;
   box-sizing: border-box;
@@ -18,8 +18,8 @@
 }
 
 .promo__title {
-  color: #FFF;
-  font-family: Inter;
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
   font-size: 50px;
   font-weight: 400;
   line-height: 58px;
@@ -28,7 +28,7 @@
 
 .promo__subtitle {
   color: rgba(255, 255, 255, 0.5);
-  font-family: Inter;
+  font-family: Inter, Arial, sans-serif;
   font-size: 13px;
   font-weight: 400;
   line-height: normal;
@@ -37,8 +37,8 @@
 }
 
 .promo__learn-more {
-  color: #FFF;
-  font-family: Inter;
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -52,7 +52,7 @@
 }
 
 .promo__learn-more:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 900px) {

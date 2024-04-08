@@ -1,7 +1,6 @@
 .about-project {
-  background: #FFF;
-  max-width: 1280px;
-  margin: 0 auto;
+  background: #fff;
+  width: 100%;
   padding: 10px 70px 110px;
   box-sizing: border-box;
 }
@@ -9,7 +8,7 @@
 .about-project__columns {
   display: flex;
   flex-direction: row;
-  gap: 40px
+  gap: 40px;
 }
 
 .about-project__column {
@@ -19,7 +18,7 @@
 .about-project__brief {
   margin: 0;
   color: #000;
-  font-family: Inter;
+  font-family: Inter, Arial, sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -31,7 +30,7 @@
 .about-project__paragraph {
   margin: 0;
   color: #000;
-  font-family: Inter;
+  font-family: Inter, Arial, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -57,9 +56,9 @@
 
 .about-project__label {
   color: #000;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   text-align: center;
-  font-family: Inter;
+  font-family: Inter, Arial, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -69,13 +68,13 @@
 }
 
 .about-project__label_type_green {
-  background-color: #2BE080;
+  background-color: #2be080;
 }
 
 .about-project__category {
-  color: #A0A0A0;
+  color: #a0a0a0;
   text-align: center;
-  font-family: Inter;
+  font-family: Inter, Arial, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -83,14 +82,13 @@
   margin: 14px 0 0;
 }
 
-
 @media screen and (max-width: 769px) {
   .about-project {
     padding: 0 50px 90px;
   }
 
   .about-project__columns {
-    gap: 30px
+    gap: 30px;
   }
 
   .about-project__paragraph {

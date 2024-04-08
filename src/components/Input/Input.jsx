@@ -11,21 +11,19 @@ export default function Input({
   ...props
 }) {
   return (
-    <>
-      <label className="input__label">
-        {label}
-        <input
-          className="input"
-          type={type}
-          name={name}
-          value={value}
-          onChange={handleChange}
-          placeholder={placeholder}
-          {...props}
-        />
-        <span className="input__error"></span>
-      </label>
-    </>
+    <label className="input">
+      {label}
+      <input
+        className="input__field"
+        type={type}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        placeholder={placeholder}
+        {...props}
+      />
+      <span className="input__error"></span>
+    </label>
   );
 }
 
