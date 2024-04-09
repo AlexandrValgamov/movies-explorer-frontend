@@ -1,0 +1,68 @@
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 70px 0;
+}
+
+.cards__gallary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min-content, 270px));
+  gap: 38px 20px;
+  width: 100%;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.cards__button {
+  width: 320px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  margin: 50px auto 80px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.cards__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 900px) {
+  .cards {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .cards__gallary {
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 339px));
+    gap: 30px;
+  }
+
+  .cards__button {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .cards {
+    padding: 40px 10px 0;
+  }
+
+  .cards__gallary {
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 300px));
+    gap: 34px;
+  }
+
+  .cards__button {
+    width: 240px;
+  }
+}

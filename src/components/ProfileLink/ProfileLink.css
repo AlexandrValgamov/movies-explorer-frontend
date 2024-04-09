@@ -1,0 +1,62 @@
+.profile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 40px;
+  background-color: #ffffff;
+  width: 100px;
+  height: 32px;
+  flex-shrink: 0;
+  text-decoration: none;
+  box-shadow: 0px 3px 14px 0px #00000014;
+}
+
+.profile-link:hover {
+  opacity: 0.8;
+}
+
+.profile-link_theme_dark {
+  background-color: #2be080;
+}
+
+.profile-link__text {
+  color: #000;
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  padding-left: 11px;
+}
+
+.profile-link__icon {
+  border-radius: 50px;
+  background-color: #f9f9f9;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  background-image: url(../../images/icon-header.svg);
+  background-position: center;
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  margin-right: 3px;
+}
+
+@media screen and (max-width: 769px) {
+  .profile-link {
+    margin-bottom: 90px;
+  }
+
+  .profile-link_theme_dark {
+    background-color: #ffffff;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .profile-link {
+    margin-bottom: 46px;
+  }
+}
