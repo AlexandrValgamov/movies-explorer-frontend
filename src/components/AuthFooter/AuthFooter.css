@@ -30,6 +30,11 @@
   color: #c2c2c2;
 }
 
+.auth-footer__button_type_error:hover {
+  opacity: 1;
+  cursor: default;
+}
+
 .auth-footer__wrapper {
   display: flex;
   flex-direction: row;

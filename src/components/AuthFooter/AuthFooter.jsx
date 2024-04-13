@@ -12,9 +12,9 @@ export default function AuthFooter({ isError, errorMesage, path }) {
 
   return (
     <div className="auth-footer">
-      {isError && <ErrorMessage message={errorMesage} />}
+      {errorMesage && <ErrorMessage message={errorMesage} />}
       <button
-        className={`auth-footer__button ${isError ? 'auth-footer__button_type_error' : ''}`}
+        className={`auth-footer__button ${isError || errorMesage ? 'auth-footer__button_type_error' : ''}`}
         aria-label={buttonText}
         type="submit"
         disabled={isError}

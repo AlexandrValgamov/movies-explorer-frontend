@@ -1,5 +1,5 @@
 import './Register.css';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Form from '../Form/Form';
 import AuthHeader from '../AuthHeader/AuthHeader';
@@ -7,30 +7,22 @@ import Fieldset from '../Fieldset/Fieldset';
 import Input from '../Input/Input';
 import AuthFooter from '../AuthFooter/AuthFooter';
 import PropTypes from 'prop-types';
+import { useFormWithValidation } from '../../hooks/useForm';
 
-export default function Register({ setUser }) {
+export default function Register({ errorForm, setErrorForm, handleRegister }) {
   const location = useLocation();
-  const navigate = useNavigate();
-  const isError = false;
-  const errorMesage = null;
-  const [formValue, setFormValue] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   const onRegister = (e) => {
     e.preventDefault();
-    setUser(formValue);
-    navigate('/');
+    handleRegister(values);
+  };
+
+  const onChange = (e) => {
+    handleChange(e);
+    if (errorForm) setErrorForm('');
   };
 
   return (
@@ -39,42 +31,48 @@ export default function Register({ setUser }) {
       <Form onSubmit={onRegister} name="register">
         <Fieldset>
           <Input
-            handleChange={handleChange}
+            onChange={onChange}
             label={'Имя'}
             type={'text'}
             name={'name'}
-            value={formValue.name}
+            value={values.name || ''}
             placeholder={'Имя'}
+            isValid={isValid}
+            errorMessage={errors.name}
             minLength={2}
             maxLength={30}
             required
           />
           <Input
-            handleChange={handleChange}
+            onChange={onChange}
             label={'E-mail'}
             type="email"
             name={'email'}
-            value={formValue.email}
+            value={values.email || ''}
             placeholder="E-mail"
-            minLength={2}
+            isValid={isValid}
+            errorMessage={errors.email}
+            minLength={5}
             maxLength={30}
             required
           />
           <Input
-            handleChange={handleChange}
+            onChange={onChange}
             label={'Пароль'}
             type={'password'}
             name={'password'}
-            value={formValue.password}
+            value={values.password || ''}
             placeholder={'Пароль'}
-            minLength={2}
-            maxLength={30}
+            isValid={isValid}
+            errorMessage={errors.password}
+            minLength={8}
+            maxLength={20}
             required
           />
         </Fieldset>
         <AuthFooter
-          isError={isError}
-          errorMesage={errorMesage}
+          isError={!isValid}
+          errorMesage={errorForm}
           path={location.pathname}
         />
       </Form>

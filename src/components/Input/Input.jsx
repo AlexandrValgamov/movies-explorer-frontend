@@ -5,9 +5,11 @@ export default function Input({
   type,
   name,
   value,
-  handleChange,
+  onChange,
   label,
   placeholder,
+  isValid,
+  errorMessage,
   ...props
 }) {
   return (
@@ -18,11 +20,11 @@ export default function Input({
         type={type}
         name={name}
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         placeholder={placeholder}
         {...props}
       />
-      <span className="input__error"></span>
+      {!isValid && <span className="input__error">{errorMessage}</span>}
     </label>
   );
 }
