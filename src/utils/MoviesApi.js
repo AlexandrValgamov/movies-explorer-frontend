@@ -13,7 +13,7 @@ class ApiMovies {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getUserInfo() {
+  getMovies() {
     return fetch(`${this._baseUrl}`, {
       headers: {
         ...this._headers,
@@ -24,4 +24,4 @@ class ApiMovies {
 
 }
 
-export const apiMovies = new ApiMovies(API_CONFIG);
+export const apiMovies = new ApiMovies(API_BEATFILM_CONFIG);

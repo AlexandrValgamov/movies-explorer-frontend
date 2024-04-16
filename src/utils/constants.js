@@ -12,5 +12,5 @@ export const API_CONFIG = {
   }
 };
 
-export const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-export const namePattern = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
+export const EMAIL_PATTERN = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+export const NAME_PATTERN = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;

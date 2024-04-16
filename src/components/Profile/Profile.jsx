@@ -1,47 +1,53 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Profile.css';
 import PropTypes from 'prop-types';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { useNavigate } from 'react-router-dom';
 import Form from '../Form/Form';
 import Fieldset from '../Fieldset/Fieldset';
 import Input from '../Input/Input';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
-export default function Profile({ setUser, setLoggedIn }) {
+export default function Profile({
+  handleEditProfile,
+  isLoading,
+  errorForm,
+  setErrorForm,
+  isSuccess,
+  handleSignOut,
+}) {
   const user = useContext(CurrentUserContext);
-  const isError = false;
-  const errorMesage = null;
   const [isEditing, setIsEditing] = useState(false);
-  const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
-  });
-  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setUser(formValue);
-    setIsEditing(false);
+    handleEditProfile(values);
   };
 
-  function handleEditClick() {
-    setIsEditing(true);
-  }
+  const onChange = (e) => {
+    handleChange(e);
+    if (errorForm) setErrorForm('');
+  };
 
-  function handleExitClick() {
-    setLoggedIn(false);
-    navigate('/');
-  }
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  useEffect(() => {
+    resetForm({
+      name: user.name,
+      email: user.email,
+    });
+  }, [user, resetForm]);
+
+  useEffect(() => {
+    return () => {
+      setErrorForm('');
+    };
+  }, [setErrorForm]);
 
   return (
     <main className="profile">
@@ -50,37 +56,48 @@ export default function Profile({ setUser, setLoggedIn }) {
         <Form onSubmit={onSubmit} name={'profile'}>
           <Fieldset>
             <Input
-              handleChange={handleChange}
+              onChange={onChange}
               label={'Имя'}
               type={'text'}
               name={'name'}
-              value={formValue.name}
+              value={values.name || ''}
               placeholder={'Имя'}
+              isValid={isValid}
+              errorMessage={errors.name}
+              isLoading={isLoading}
               minLength={2}
               maxLength={40}
               required
             />
             <Input
-              handleChange={handleChange}
+              onChange={onChange}
               label={'E-mail'}
               type={'email'}
               name={'email'}
-              value={formValue.email}
+              value={values.email || ''}
               placeholder={'E-mail'}
-              minLength={2}
-              maxLength={40}
+              isValid={isValid}
+              errorMessage={errors.email}
+              isLoading={isLoading}
+              minLength={5}
+              maxLength={30}
               required
             />
           </Fieldset>
           <div className="profile__button-wrapper">
-            {isError && <ErrorMessage message={errorMesage} />}
+            {errorForm && <ErrorMessage message={errorForm} />}
+            {isSuccess && (
+              <p className="profile__success-message">
+                Данные успешно изменены
+              </p>
+            )}
             <button
-              className={`profile__save-button ${isError ? 'profile__save-button_type_error' : ''}`}
+              className={`profile__save-button ${!isValid || errorForm || isLoading ? 'profile__save-button_type_error' : ''}`}
               aria-label="Сохранить"
               type="submit"
-              disabled={isError}
+              disabled={!isValid || errorForm || isLoading}
             >
-              Сохранить
+              {isLoading ? 'Загрузка...' : 'Сохранить'}
             </button>
           </div>
         </Form>
@@ -100,7 +117,7 @@ export default function Profile({ setUser, setLoggedIn }) {
             <button onClick={handleEditClick} className="profile__button">
               Редактировать
             </button>
-            <button onClick={handleExitClick} className="profile__button">
+            <button onClick={handleSignOut} className="profile__button">
               Выйти из аккаунта
             </button>
           </div>
@@ -111,6 +128,10 @@ export default function Profile({ setUser, setLoggedIn }) {
 }
 
 Profile.propTypes = {
-  setUser: PropTypes.func,
-  setLoggedIn: PropTypes.func,
+  handleEditProfile: PropTypes.func,
+  isLoading: PropTypes.bool,
+  errorForm: PropTypes.string,
+  setErrorForm: PropTypes.func,
+  isSuccess: PropTypes.bool,
+  handleSignOut: PropTypes.func,
 };

@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from 'react';
-import { emailPattern, namePattern } from '../utils/constants';
+import React, { useCallback } from 'react';
+import { EMAIL_PATTERN, NAME_PATTERN } from '../utils/constants';
 
 export function useFormWithValidation() {
   const [values, setValues] = React.useState({});
@@ -11,9 +11,9 @@ export function useFormWithValidation() {
     const name = target.name;
     const value = target.value;
 
-    if (name === 'email' && !emailPattern.test(value)) {
+    if (name === 'email' && !EMAIL_PATTERN.test(value)) {
       target.setCustomValidity('Email должен быть действительным.');
-    } else if (name === 'name' && !namePattern.test(value)) {
+    } else if (name === 'name' && !NAME_PATTERN.test(value)) {
       target.setCustomValidity(
         'Имя может содержать только буквы латиницы, кириллицы, пробелы и дефисы.',
       );

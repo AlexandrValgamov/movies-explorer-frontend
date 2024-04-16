@@ -13,6 +13,21 @@ class Api {
     return Promise.reject(res.status);
   }
 
+  checkToken = (token) => {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        ...this._headers,
+        authorization: `Bearer ${token}`,
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return true;
+        }
+        return Promise.reject(res.status);
+      })
+  }
+
   register = (password, email, name) => {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
@@ -62,7 +77,7 @@ class Api {
       .then(this._handleResponse);
   }
 
-  updateUserInfo(name, info) {
+  updateUserInfo(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -71,8 +86,31 @@ class Api {
       },
       body: JSON.stringify({
         name,
-        about: info
+        email,
       })
+    })
+      .then(this._handleResponse);
+  }
+
+  saveMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'POST',
+      headers: {
+        ...this._headers,
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(movie)
+    })
+      .then(this._handleResponse);
+  }
+
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        ...this._headers,
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
     })
       .then(this._handleResponse);
   }
@@ -112,42 +150,6 @@ class Api {
     })
       .then(this._handleResponse);
   }
-
-  deleteMovie(movieId) {
-    return fetch(`${this._baseUrl}/cards/${movieId}`, {
-      method: 'DELETE',
-      headers: {
-        ...this._headers,
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      }
-    })
-      .then(this._handleResponse);
-  }
-
-  //   changeLikeCardStatus(cardId, isLiked) {
-  //     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-  //       method: isLiked ? 'PUT' : 'DELETE',
-  //       headers: {
-  //         ...this._headers,
-  //         authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  //       }
-  //     })
-  //       .then(this._handleResponse);
-  //   }
-
-  //   updateAvatar(link) {
-  //     return fetch(`${this._baseUrl}/users/me/avatar`, {
-  //       method: 'PATCH',
-  //       headers: {
-  //         ...this._headers,
-  //         authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  //       },
-  //       body: JSON.stringify({
-  //         avatar: link
-  //       })
-  //     })
-  //       .then(this._handleResponse);
-  //   }
 }
 
 export const api = new Api(API_CONFIG);

@@ -10,6 +10,7 @@ export default function Input({
   placeholder,
   isValid,
   errorMessage,
+  isLoading,
   ...props
 }) {
   return (
@@ -22,6 +23,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        disabled={isLoading}
         {...props}
       />
       {!isValid && <span className="input__error">{errorMessage}</span>}
@@ -33,7 +35,10 @@ Input.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,
-  handleChange: PropTypes.func,
+  onChange: PropTypes.func,
   label: PropTypes.string,
   placeholder: PropTypes.string,
+  isValid: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  isLoading: PropTypes.bool,
 };

@@ -5,15 +5,19 @@ import Form from '../Form/Form';
 import Fieldset from '../Fieldset/Fieldset';
 import Input from '../Input/Input';
 import AuthFooter from '../AuthFooter/AuthFooter';
-import { useFormWithValidation } from '../../hooks/useForm';
-import { useEffect } from 'react';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
-export default function Login({ handleLogin, errorForm, setErrorForm }) {
+export default function Login({
+  handleLogin,
+  errorForm,
+  setErrorForm,
+  isLoading,
+}) {
   const location = useLocation();
 
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormWithValidation();
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const onLogin = (e) => {
     e.preventDefault();
@@ -24,6 +28,12 @@ export default function Login({ handleLogin, errorForm, setErrorForm }) {
     handleChange(e);
     if (errorForm) setErrorForm('');
   };
+
+  useEffect(() => {
+    return () => {
+      setErrorForm('');
+    };
+  }, [setErrorForm]);
 
   return (
     <main className="login">
@@ -39,6 +49,7 @@ export default function Login({ handleLogin, errorForm, setErrorForm }) {
             placeholder={'E-mail'}
             isValid={isValid}
             errorMessage={errors.email}
+            isLoading={isLoading}
             required
             minLength={5}
             maxLength={30}
@@ -52,14 +63,16 @@ export default function Login({ handleLogin, errorForm, setErrorForm }) {
             placeholder={'Пароль'}
             isValid={isValid}
             errorMessage={errors.password}
+            isLoading={isLoading}
             required
             minLength={8}
             maxLength={20}
           />
         </Fieldset>
         <AuthFooter
+          isLoading={isLoading}
           isError={!isValid}
-          errorMesage={errorForm}
+          errorMessage={errorForm}
           path={location.pathname}
         />
       </Form>
@@ -68,6 +81,8 @@ export default function Login({ handleLogin, errorForm, setErrorForm }) {
 }
 
 Login.propTypes = {
-  setLoggedIn: PropTypes.func,
-  setUser: PropTypes.func,
+  handleLogin: PropTypes.func,
+  errorForm: PropTypes.string,
+  setErrorForm: PropTypes.func,
+  isLoading: PropTypes.bool,
 };
