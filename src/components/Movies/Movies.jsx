@@ -5,9 +5,13 @@ import Preloader from '../Preloader/Preloader';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { useEffect, useState } from 'react';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { SEARCH_NOT_FOUND } from '../../utils/errorMessages';
+import {
+  EMPTY_SEARCH_ERROR,
+  SEARCH_NOT_FOUND,
+} from '../../utils/errorMessages';
 import { filterShortMovies } from '../../utils/utils';
 import SearchMoviesCardList from '../SearchMoviesCardList/SearchMoviesCardList';
+import { SEARCH_DATA_KEY } from '../../utils/constants';
 
 export default function Movies({
   handleSearchMovie,
@@ -25,7 +29,7 @@ export default function Movies({
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
-    const savedSearchData = localStorage.getItem('searchData');
+    const savedSearchData = localStorage.getItem(SEARCH_DATA_KEY);
     if (savedSearchData) {
       const { searchQuery, isFilter, searchedMovies } =
         JSON.parse(savedSearchData);
@@ -49,7 +53,7 @@ export default function Movies({
   const onSubmit = (e) => {
     e.preventDefault();
     if (!values.search) {
-      setError('Нужно ввести ключевое слово для поиска.');
+      setError(EMPTY_SEARCH_ERROR);
       return;
     }
     setError('');

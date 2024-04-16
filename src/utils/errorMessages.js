@@ -18,3 +18,8 @@ export const SERVER_ERROR_404 = "404 Страница по указанному 
 // Сообщения об ошибках на странице поиска фильмов
 export const SEARCH_NOT_FOUND = "Ничего не найдено";
 export const SEARCH_ERROR = "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.";
+
+export const INVALID_EMAIL_ERROR = 'Email должен быть действительным.';
+export const INVALID_NAME_ERROR = 'Имя может содержать только буквы латиницы, кириллицы, пробелы и дефисы.';
+export const ERROR_FETCHING_MOVIES = 'Ошибка при запросе фильмов:';
+export const EMPTY_SEARCH_ERROR = 'Нужно ввести ключевое слово для поиска.';

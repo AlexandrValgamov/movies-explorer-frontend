@@ -2,22 +2,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileLink from '../ProfileLink/ProfileLink';
 import './Navigation.css';
+import { LOGGED_IN_LINKS, LOGGED_OUT_LINKS } from '../../utils/constants';
 
 export default function Navigation({ loggedIn, isOpen, location }) {
-  const links = loggedIn
-    ? [
-        { to: '/', text: 'Главная', activePath: '/' },
-        { to: '/movies', text: 'Фильмы', activePath: '/movies' },
-        {
-          to: '/saved-movies',
-          text: 'Сохраненные фильмы',
-          activePath: '/saved-movies',
-        },
-      ]
-    : [
-        { to: '/signup', text: 'Регистрация' },
-        { to: '/signin', text: 'Войти' },
-      ];
+  const links = loggedIn ? LOGGED_IN_LINKS : LOGGED_OUT_LINKS;
 
   return (
     <>

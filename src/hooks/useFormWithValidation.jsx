@@ -1,5 +1,9 @@
 import React, { useCallback } from 'react';
 import { EMAIL_PATTERN, NAME_PATTERN } from '../utils/constants';
+import {
+  INVALID_EMAIL_ERROR,
+  INVALID_NAME_ERROR,
+} from '../utils/errorMessages';
 
 export function useFormWithValidation() {
   const [values, setValues] = React.useState({});
@@ -12,11 +16,9 @@ export function useFormWithValidation() {
     const value = target.value;
 
     if (name === 'email' && !EMAIL_PATTERN.test(value)) {
-      target.setCustomValidity('Email должен быть действительным.');
+      target.setCustomValidity(INVALID_EMAIL_ERROR);
     } else if (name === 'name' && !NAME_PATTERN.test(value)) {
-      target.setCustomValidity(
-        'Имя может содержать только буквы латиницы, кириллицы, пробелы и дефисы.',
-      );
+      target.setCustomValidity(INVALID_NAME_ERROR);
     } else target.setCustomValidity('');
 
     setValues((prevValues) => ({ ...prevValues, [name]: value }));

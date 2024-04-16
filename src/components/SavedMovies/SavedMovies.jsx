@@ -5,7 +5,10 @@ import './SavedMovies.css';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { useEffect, useState } from 'react';
 import { filterShortMovies } from '../../utils/utils';
-import { SEARCH_NOT_FOUND } from '../../utils/errorMessages';
+import {
+  EMPTY_SEARCH_ERROR,
+  SEARCH_NOT_FOUND,
+} from '../../utils/errorMessages';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export default function SavedMovies({ movies, onCardDislike }) {
@@ -64,7 +67,7 @@ export default function SavedMovies({ movies, onCardDislike }) {
   const onSubmit = (e) => {
     e.preventDefault();
     if (!isValid) {
-      setError('Нужно ввести ключевое слово для поиска.');
+      setError(EMPTY_SEARCH_ERROR);
       return;
     }
     handleSearchSavedMovie(values.search);

@@ -3,6 +3,7 @@ import './MoviesCard.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { checkIsLiked } from '../../utils/utils';
+import { BASE_IMAGE_URL } from '../../utils/constants';
 
 export default function MoviesCard({
   card,
@@ -30,18 +31,16 @@ export default function MoviesCard({
         duration: card.duration,
         year: card.year,
         description: card.description,
-        image: `https://api.nomoreparties.co/${card.image.url}`,
-        trailerLink: `https://api.nomoreparties.co/${card.trailerLink}`,
-        thumbnail: `https://api.nomoreparties.co/${card.image.formats.thumbnail.url}`,
+        image: `${BASE_IMAGE_URL}/${card.image.url}`,
+        trailerLink: `${BASE_IMAGE_URL}/${card.trailerLink}`,
+        thumbnail: `${BASE_IMAGE_URL}/${card.image.formats.thumbnail.url}`,
         movieId: card.id,
         nameRU: card.nameRU,
         nameEN: card.nameEN,
       };
       onCardLike(movieData);
-      setIsLiked(true);
     } else {
       onCardDislike(card.id);
-      setIsLiked(false);
     }
   };
 
@@ -55,11 +54,7 @@ export default function MoviesCard({
       >
         <img
           className="card__image"
-          src={
-            onCardLike
-              ? `https://api.nomoreparties.co/${card.image.url}`
-              : card.image
-          }
+          src={onCardLike ? `${BASE_IMAGE_URL}/${card.image.url}` : card.image}
           alt={card.nameRU}
         />
       </Link>
@@ -90,32 +85,38 @@ export default function MoviesCard({
 
 MoviesCard.propTypes = {
   card: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    id: PropTypes.number,
     movieId: PropTypes.number,
-    nameRU: PropTypes.string,
-    nameEN: PropTypes.string,
     country: PropTypes.string,
     director: PropTypes.string,
     duration: PropTypes.number,
     year: PropTypes.string,
     description: PropTypes.string,
-    image: PropTypes.shape({
-      url: PropTypes.string,
-      formats: PropTypes.shape({
-        thumbnail: PropTypes.shape({
-          url: PropTypes.string,
+    image: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        url: PropTypes.string,
+        formats: PropTypes.shape({
+          thumbnail: PropTypes.shape({
+            url: PropTypes.string,
+          }),
         }),
       }),
-    }),
+    ]),
     trailerLink: PropTypes.string,
-  }).isRequired,
+    nameRU: PropTypes.string,
+    nameEN: PropTypes.string,
+  }),
   onCardLike: PropTypes.func,
   onCardDislike: PropTypes.func,
   savedMovies: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      nameRU: PropTypes.string,
-      nameEN: PropTypes.string,
+      id: PropTypes.number,
     }),
   ),
+};
+
+MoviesCard.defaultProps = {
+  savedMovies: [],
+  onCardLike: null,
 };

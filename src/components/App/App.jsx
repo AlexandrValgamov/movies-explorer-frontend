@@ -26,12 +26,23 @@ import {
 } from '../../utils/errorHandler';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
-import { SEARCH_ERROR, SEARCH_NOT_FOUND } from '../../utils/errorMessages';
+import {
+  ERROR_FETCHING_MOVIES,
+  SEARCH_ERROR,
+  SEARCH_NOT_FOUND,
+} from '../../utils/errorMessages';
+import {
+  AUTH_TOKEN_KEY,
+  FOOTER_PATHS,
+  HEADER_PATHS,
+  SEARCH_DATA_KEY,
+  SUCCESS_MESSAGE_TIMEOUT,
+  UNAUTHORIZED_ERROR_CODE,
+} from '../../utils/constants';
+import { filterShortMovies } from '../../utils/utils';
 
 export default function App() {
   const location = useLocation();
-  const headerPaths = ['/', '/movies', '/saved-movies', '/profile'];
-  const footerPaths = ['/', '/movies', '/saved-movies'];
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -39,7 +50,6 @@ export default function App() {
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
-
   const [user, setUser] = React.useState({});
   const [errorServerMessage, setErrorServerMessage] = React.useState('');
   const navigate = useNavigate();
@@ -63,11 +73,11 @@ export default function App() {
       .login(email, password)
       .then((data) => {
         if (data.token) {
-          localStorage.setItem('token', data.token);
+          localStorage.setItem(AUTH_TOKEN_KEY, data.token);
           setLoggedIn(true);
           navigate('/movies', { replace: true });
         } else {
-          throw 401;
+          throw UNAUTHORIZED_ERROR_CODE;
         }
       })
       .catch((errorCode) => {
@@ -83,7 +93,7 @@ export default function App() {
       .then((userData) => {
         setUser(userData);
         setIsSuccess(true);
-        setTimeout(() => setIsSuccess(false), 5000);
+        setTimeout(() => setIsSuccess(false), SUCCESS_MESSAGE_TIMEOUT);
       })
       .catch((errorCode) => {
         errorHandlerProfileUpdate(errorCode, setErrorServerMessage);
@@ -104,7 +114,7 @@ export default function App() {
     apiMovies
       .getMovies()
       .then((movies) => {
-        const filteredMovies = movies.filter((movie) => {
+        const searchMovies = movies.filter((movie) => {
           const lowercasedQuery = searchQuery.toLowerCase();
           return (
             (movie.nameRU &&
@@ -113,12 +123,15 @@ export default function App() {
               movie.nameEN.toLowerCase().includes(lowercasedQuery))
           );
         });
+        const filteredMovies = isFilter
+          ? filterShortMovies(searchMovies)
+          : searchMovies;
         const searchData = {
           searchQuery: searchQuery,
           isFilter: isFilter,
           searchedMovies: filteredMovies,
         };
-        localStorage.setItem('searchData', JSON.stringify(searchData));
+        localStorage.setItem(SEARCH_DATA_KEY, JSON.stringify(searchData));
         setMovies(filteredMovies);
         if (filteredMovies.length === 0) {
           setError(SEARCH_NOT_FOUND);
@@ -126,7 +139,7 @@ export default function App() {
       })
       .catch((err) => {
         setError(SEARCH_ERROR);
-        console.error('Ошибка при запросе фильмов:', err);
+        console.error(ERROR_FETCHING_MOVIES, err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -154,10 +167,12 @@ export default function App() {
     if (movie._id) {
       api
         .deleteMovie(movie._id)
-        .then(() => {
-          setSavedMovies((prevState) =>
-            prevState.filter((movie) => movie.movieId !== id),
-          );
+        .then((data) => {
+          if (data) {
+            setSavedMovies((prevState) =>
+              prevState.filter((movie) => movie.movieId !== id),
+            );
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -166,7 +181,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
     if (token) {
       api
         .checkToken(token)
@@ -174,7 +189,7 @@ export default function App() {
           if (isValid) setLoggedIn(true);
         })
         .catch((error) => {
-          localStorage.removeItem('token');
+          localStorage.removeItem(AUTH_TOKEN_KEY);
           setLoggedIn(false);
           console.log(error);
         })
@@ -204,7 +219,7 @@ export default function App() {
   return (
     <CurrentUserContext.Provider value={user}>
       <div className="page">
-        {headerPaths.includes(location.pathname) && (
+        {HEADER_PATHS.includes(location.pathname) && (
           <Header loggedIn={loggedIn} />
         )}
         <Routes>
@@ -291,7 +306,7 @@ export default function App() {
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {footerPaths.includes(location.pathname) && <Footer />}
+        {FOOTER_PATHS.includes(location.pathname) && <Footer />}
       </div>
     </CurrentUserContext.Provider>
   );

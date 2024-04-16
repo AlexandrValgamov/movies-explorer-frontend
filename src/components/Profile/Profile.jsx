@@ -7,6 +7,12 @@ import Fieldset from '../Fieldset/Fieldset';
 import Input from '../Input/Input';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import {
+  EMAIL_MAX_LENGTH,
+  EMAIL_MIN_LENGTH,
+  MAX_NAME_LENGTH,
+  MIN_NAME_LENGTH,
+} from '../../utils/constants';
 
 export default function Profile({
   handleEditProfile,
@@ -18,13 +24,17 @@ export default function Profile({
 }) {
   const user = useContext(CurrentUserContext);
   const [isEditing, setIsEditing] = useState(false);
-
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
+  const isModified = user.name !== values.name || user.email !== values.email;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleEditProfile(values);
+    if (isModified) {
+      handleEditProfile(values);
+    } else {
+      setIsEditing(false);
+    }
   };
 
   const onChange = (e) => {
@@ -49,6 +59,8 @@ export default function Profile({
     };
   }, [setErrorForm]);
 
+  const saveButtonDisabled = !isValid || errorForm || isLoading || !isModified;
+
   return (
     <main className="profile">
       <h1 className="profile__title">Привет, {user.name}!</h1>
@@ -65,8 +77,8 @@ export default function Profile({
               isValid={isValid}
               errorMessage={errors.name}
               isLoading={isLoading}
-              minLength={2}
-              maxLength={40}
+              minLength={MIN_NAME_LENGTH}
+              maxLength={MAX_NAME_LENGTH}
               required
             />
             <Input
@@ -79,8 +91,8 @@ export default function Profile({
               isValid={isValid}
               errorMessage={errors.email}
               isLoading={isLoading}
-              minLength={5}
-              maxLength={30}
+              minLength={EMAIL_MIN_LENGTH}
+              maxLength={EMAIL_MAX_LENGTH}
               required
             />
           </Fieldset>
@@ -92,10 +104,10 @@ export default function Profile({
               </p>
             )}
             <button
-              className={`profile__save-button ${!isValid || errorForm || isLoading ? 'profile__save-button_type_error' : ''}`}
+              className={`profile__save-button ${saveButtonDisabled ? 'profile__save-button_type_error' : ''}`}
               aria-label="Сохранить"
               type="submit"
-              disabled={!isValid || errorForm || isLoading}
+              disabled={saveButtonDisabled}
             >
               {isLoading ? 'Загрузка...' : 'Сохранить'}
             </button>
