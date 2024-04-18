@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './MoviesCard.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -11,11 +10,7 @@ export default function MoviesCard({
   onCardDislike,
   savedMovies = [],
 }) {
-  const [isLiked, setIsLiked] = useState(false);
-
-  useEffect(() => {
-    if (onCardLike) setIsLiked(checkIsLiked(savedMovies, card.id));
-  }, [savedMovies]);
+  const isLiked = checkIsLiked(savedMovies, card.id);
 
   function formatDuration(duration) {
     const hours = Math.floor(duration / 60);
