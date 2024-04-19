@@ -1,15 +1,16 @@
-import { useState } from 'react';
 import './MoviesCard.css';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { checkIsLiked } from '../../utils/utils';
+import { BASE_IMAGE_URL } from '../../utils/constants';
 
-export default function MoviesCard({ card }) {
-  const [isLiked, setIsLiked] = useState(false);
-  let location = useLocation();
-
-  function handleLikeClick() {
-    setIsLiked((prev) => !prev);
-  }
+export default function MoviesCard({
+  card,
+  onCardLike,
+  onCardDislike,
+  savedMovies = [],
+}) {
+  const isLiked = checkIsLiked(savedMovies, card.id);
 
   function formatDuration(duration) {
     const hours = Math.floor(duration / 60);
@@ -17,17 +18,45 @@ export default function MoviesCard({ card }) {
     return (hours > 0 ? `${hours}ч ` : '') + (minutes > 0 ? `${minutes}м` : '');
   }
 
+  const handleLikeClick = () => {
+    if (!isLiked) {
+      const movieData = {
+        country: card.country,
+        director: card.director,
+        duration: card.duration,
+        year: card.year,
+        description: card.description,
+        image: `${BASE_IMAGE_URL}/${card.image.url}`,
+        trailerLink: `${BASE_IMAGE_URL}/${card.trailerLink}`,
+        thumbnail: `${BASE_IMAGE_URL}/${card.image.formats.thumbnail.url}`,
+        movieId: card.id,
+        nameRU: card.nameRU,
+        nameEN: card.nameEN,
+      };
+      onCardLike(movieData);
+    } else {
+      onCardDislike(card.id);
+    }
+  };
+
   return (
     <article className="card">
-      <img
-        className="card__image"
-        src={`https://api.nomoreparties.co/${card.image.url}`}
-        alt={card.nameRU}
-      />
+      <Link
+        to={card.trailerLink}
+        className="card__link"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <img
+          className="card__image"
+          src={onCardLike ? `${BASE_IMAGE_URL}/${card.image.url}` : card.image}
+          alt={card.nameRU}
+        />
+      </Link>
       <div className="card__widget">
         <div className="card__name-group">
           <p className="card__title">{card.nameRU}</p>
-          {location.pathname === '/movies' ? (
+          {onCardLike ? (
             <button
               className={`card__button${isLiked ? ' card__button_active' : ''}`}
               onClick={handleLikeClick}
@@ -39,6 +68,7 @@ export default function MoviesCard({ card }) {
               className="card__button card__button_type_delete"
               aria-label="Дизлайк"
               type="button"
+              onClick={() => onCardDislike(card.movieId)}
             />
           )}
         </div>
@@ -50,11 +80,38 @@ export default function MoviesCard({ card }) {
 
 MoviesCard.propTypes = {
   card: PropTypes.shape({
-    image: PropTypes.shape({
-      url: PropTypes.string.isRequired,
-    }).isRequired,
-    nameRU: PropTypes.string,
+    id: PropTypes.number,
+    movieId: PropTypes.number,
+    country: PropTypes.string,
+    director: PropTypes.string,
     duration: PropTypes.number,
-    isLiked: PropTypes.bool,
-  }).isRequired,
+    year: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        url: PropTypes.string,
+        formats: PropTypes.shape({
+          thumbnail: PropTypes.shape({
+            url: PropTypes.string,
+          }),
+        }),
+      }),
+    ]),
+    trailerLink: PropTypes.string,
+    nameRU: PropTypes.string,
+    nameEN: PropTypes.string,
+  }),
+  onCardLike: PropTypes.func,
+  onCardDislike: PropTypes.func,
+  savedMovies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  ),
+};
+
+MoviesCard.defaultProps = {
+  savedMovies: [],
+  onCardLike: null,
 };

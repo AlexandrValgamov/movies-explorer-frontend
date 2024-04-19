@@ -5,5 +5,16 @@
   line-height: 13.31px;
   text-align: center;
   color: #ff004c;
+  margin: 0 auto;
   margin-bottom: 20px;
+  max-width: 396px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 760px) {
+  .error-message {
+    max-width: 260px;
+  }
 }

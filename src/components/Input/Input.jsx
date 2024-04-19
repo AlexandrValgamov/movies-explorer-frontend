@@ -5,9 +5,12 @@ export default function Input({
   type,
   name,
   value,
-  handleChange,
+  onChange,
   label,
   placeholder,
+  isValid,
+  errorMessage,
+  isLoading,
   ...props
 }) {
   return (
@@ -18,11 +21,12 @@ export default function Input({
         type={type}
         name={name}
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         placeholder={placeholder}
+        disabled={isLoading}
         {...props}
       />
-      <span className="input__error"></span>
+      {!isValid && <span className="input__error">{errorMessage}</span>}
     </label>
   );
 }
@@ -31,7 +35,10 @@ Input.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,
-  handleChange: PropTypes.func,
+  onChange: PropTypes.func,
   label: PropTypes.string,
   placeholder: PropTypes.string,
+  isValid: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  isLoading: PropTypes.bool,
 };

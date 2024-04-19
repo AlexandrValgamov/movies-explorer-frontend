@@ -1,0 +1,38 @@
+.movies-list-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.movies-list-wrapper__button {
+  width: 320px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  margin: 50px auto 80px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.movies-list-wrapper__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 900px) {
+  .movies-list-wrapper__button {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .movies-list-wrapper__button {
+    width: 240px;
+  }
+}

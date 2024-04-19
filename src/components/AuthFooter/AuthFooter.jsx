@@ -2,22 +2,26 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './AuthFooter.css';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { AUTH_TEXTS, LOADING_MESSAGE } from '../../utils/constants';
 
-export default function AuthFooter({ isError, errorMesage, path }) {
-  const text =
-    path === '/signin' ? 'Ещё не зарегистрированы?' : 'Уже зарегистрированы?';
-  const linkText = path === '/signin' ? 'Регистрация' : 'Войти';
-  const buttonText = path === '/signin' ? 'Войти' : 'Зарегистрироваться';
-  const link = path === '/signin' ? '/signup' : '/signin';
+export default function AuthFooter({ isError, errorMessage, path, isLoading }) {
+  const {
+    text,
+    link,
+    linkText,
+    buttonText: defaultButtonText,
+  } = AUTH_TEXTS[path];
+  const buttonText = isLoading ? LOADING_MESSAGE : defaultButtonText;
+  const hasError = isError || errorMessage || isLoading;
 
   return (
     <div className="auth-footer">
-      {isError && <ErrorMessage message={errorMesage} />}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
       <button
-        className={`auth-footer__button ${isError ? 'auth-footer__button_type_error' : ''}`}
+        className={`auth-footer__button ${hasError ? 'auth-footer__button_type_error' : ''}`}
         aria-label={buttonText}
         type="submit"
-        disabled={isError}
+        disabled={hasError}
       >
         {buttonText}
       </button>
@@ -33,6 +37,7 @@ export default function AuthFooter({ isError, errorMesage, path }) {
 
 AuthFooter.propTypes = {
   isError: PropTypes.bool,
-  errorMesage: PropTypes.string,
+  errorMessage: PropTypes.string,
   path: PropTypes.string,
+  isLoading: PropTypes.bool,
 };

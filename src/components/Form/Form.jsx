@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function Form({ onSubmit, name, children }) {
   return (
-    <form className="form" name={name} onSubmit={onSubmit}>
+    <form className="form" name={name} onSubmit={onSubmit} noValidate>
       {children}
     </form>
   );
