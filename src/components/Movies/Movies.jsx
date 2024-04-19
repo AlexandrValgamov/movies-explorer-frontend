@@ -62,6 +62,7 @@ export default function Movies({
 
   const handleChangeFilter = (e) => {
     setIsFilter(e.target.checked);
+    handleSearchMovie(values.search, e.target.checked, setError);
   };
 
   return (

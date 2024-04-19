@@ -35,11 +35,10 @@ import {
   AUTH_TOKEN_KEY,
   FOOTER_PATHS,
   HEADER_PATHS,
-  SEARCH_DATA_KEY,
   SUCCESS_MESSAGE_TIMEOUT,
   UNAUTHORIZED_ERROR_CODE,
 } from '../../utils/constants';
-import { filterShortMovies } from '../../utils/utils';
+import { filterShortMovies, saveToLocalStorage } from '../../utils/utils';
 
 export default function App() {
   const location = useLocation();
@@ -126,12 +125,7 @@ export default function App() {
         const filteredMovies = isFilter
           ? filterShortMovies(searchMovies)
           : searchMovies;
-        const searchData = {
-          searchQuery: searchQuery,
-          isFilter: isFilter,
-          searchedMovies: filteredMovies,
-        };
-        localStorage.setItem(SEARCH_DATA_KEY, JSON.stringify(searchData));
+        saveToLocalStorage(searchQuery, isFilter, filteredMovies);
         setMovies(filteredMovies);
         if (filteredMovies.length === 0) {
           setError(SEARCH_NOT_FOUND);
